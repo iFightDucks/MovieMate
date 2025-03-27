@@ -17,8 +17,6 @@ import { MovieCard } from '../../components/MovieCard';
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 44 : StatusBar.currentHeight || 0;
 
-// This file exists just to satisfy the router
-// Bookmarks navigation is handled in the tab layout
 export default function BookmarksScreen() {
   const router = useRouter();
   const { favorites } = useFavorites();
@@ -28,14 +26,23 @@ export default function BookmarksScreen() {
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
+          <View style={styles.leftPlaceholder} />
           <Text style={styles.headerTitle}>Bookmarks</Text>
+          <TouchableOpacity 
+            style={styles.homeButton}
+            onPress={() => router.replace("/")}
+          >
+            <Feather name="home" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
         </View>
         
         {favorites.length > 0 ? (
           <FlatList
             data={favorites}
             renderItem={({ item }: { item: Movie }) => (
-              <MovieCard movie={item} />
+              <View style={styles.gridCardContainer}>
+                <MovieCard movie={item} />
+              </View>
             )}
             keyExtractor={(item) => item.imdbID}
             contentContainerStyle={styles.listContent}
@@ -50,7 +57,7 @@ export default function BookmarksScreen() {
             
             <TouchableOpacity
               style={styles.button}
-              onPress={() => router.push("/")}
+              onPress={() => router.replace("/")}
             >
               <Text style={styles.buttonText}>Browse Movies</Text>
             </TouchableOpacity>
@@ -70,11 +77,28 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
     paddingVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  leftPlaceholder: {
+    width: 40,
+    height: 40,
+    opacity: 0,
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    textAlign: 'center',
+  },
+  homeButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#2C2C2C',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   content: {
     flex: 1,
@@ -112,5 +136,11 @@ const styles = StyleSheet.create({
   },
   columnWrapper: {
     justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  gridCardContainer: {
+    flex: 1,
+    maxWidth: '50%',
+    padding: 4,
   },
 }); 

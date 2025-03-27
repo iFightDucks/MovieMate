@@ -6,20 +6,30 @@ import {
   StatusBar, 
   SafeAreaView,
   Platform,
-  Image
+  Image,
+  TouchableOpacity
 } from 'react-native';
+import { useRouter } from 'expo-router';
+import { Feather } from '@expo/vector-icons';
 
 const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 44 : StatusBar.currentHeight || 0;
 
-// This file exists just to satisfy the router
-// Profile functionality to be implemented later
 export default function ProfileScreen() {
+  const router = useRouter();
+
   return (
     <>
       <StatusBar barStyle="light-content" backgroundColor="#121212" />
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
+          <View style={styles.leftPlaceholder} />
           <Text style={styles.headerTitle}>Profile</Text>
+          <TouchableOpacity 
+            style={styles.homeButton}
+            onPress={() => router.replace("/")}
+          >
+            <Feather name="home" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
         </View>
         
         <View style={styles.content}>
@@ -55,6 +65,13 @@ export default function ProfileScreen() {
           </View>
           
           <Text style={styles.comingSoon}>Profile settings coming soon</Text>
+          
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => router.replace("/")}
+          >
+            <Text style={styles.buttonText}>Browse Movies</Text>
+          </TouchableOpacity>
         </View>
       </SafeAreaView>
     </>
@@ -70,11 +87,28 @@ const styles = StyleSheet.create({
   header: {
     paddingHorizontal: 16,
     paddingVertical: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  leftPlaceholder: {
+    width: 40,
+    height: 40,
+    opacity: 0,
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    textAlign: 'center',
+  },
+  homeButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#2C2C2C',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   content: {
     flex: 1,
@@ -136,5 +170,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#BBBBBB',
     marginTop: 20,
+    marginBottom: 24,
+  },
+  button: {
+    backgroundColor: '#BB86FC',
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 12,
+  },
+  buttonText: {
+    color: '#FFFFFF',
+    fontWeight: '600',
+    fontSize: 16,
   },
 }); 

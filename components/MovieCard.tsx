@@ -13,7 +13,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import { Movie, useFavorites } from '../hooks/use-favorites';
 
 const { width } = Dimensions.get('window');
-const CARD_WIDTH = width * 0.425; // Allows for 2 cards per row with spacing
+// We'll adjust sizing to be more flexible based on parent container
+// and rely less on fixed dimensions
 
 interface MovieCardProps {
   movie: Movie;
@@ -48,34 +49,33 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
             <FontAwesome name="film" size={40} color="#888" />
           </View>
         )}
+        
+        <TouchableOpacity
+          style={[
+            styles.favoriteButton,
+            isFav && styles.favoriteButtonActive
+          ]}
+          onPress={handleToggleFavorite}
+        >
+          <FontAwesome 
+            name={isFav ? "star" : "star-o"} 
+            size={16} 
+            color="#FFFFFF" 
+          />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.info}>
         <Text 
           style={styles.title} 
           numberOfLines={2}
+          ellipsizeMode="tail"
         >
           {movie.Title}
         </Text>
         <Text style={styles.year}>
           {movie.Year}
         </Text>
-
-        <TouchableOpacity
-          style={styles.favoriteButton}
-          onPress={handleToggleFavorite}
-        >
-          <View style={styles.favoriteContent}>
-            <FontAwesome 
-              name={isFav ? "star" : "star-o"} 
-              size={16} 
-              color={isFav ? '#ff6b6b' : '#999'} 
-            />
-            <Text style={{ color: isFav ? '#ff6b6b' : '#999', marginLeft: 6 }}>
-              {isFav ? 'Favorite' : 'Add to Favorites'}
-            </Text>
-          </View>
-        </TouchableOpacity>
       </View>
     </TouchableOpacity>
   );
@@ -83,54 +83,59 @@ export const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
 
 const styles = StyleSheet.create({
   card: {
-    width: CARD_WIDTH,
-    marginBottom: 20,
-    marginHorizontal: 8,
-    borderRadius: 16,
+    width: '100%',
+    borderRadius: 12,
     backgroundColor: '#1E1E1E',
     overflow: 'hidden',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   posterContainer: {
     position: 'relative',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
+    borderTopLeftRadius: 12,
+    borderTopRightRadius: 12,
     overflow: 'hidden',
   },
   poster: {
     width: '100%',
-    height: CARD_WIDTH * 1.5,
+    aspectRatio: 2/3, // Standard movie poster ratio
     backgroundColor: '#2C2C2C',
   },
   noPoster: {
     width: '100%',
-    height: CARD_WIDTH * 1.5,
+    aspectRatio: 2/3,
     backgroundColor: '#2C2C2C',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  favoriteButton: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  favoriteButtonActive: {
+    backgroundColor: '#BB86FC',
   },
   info: {
     padding: 12,
   },
   title: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: 'bold',
     color: '#FFFFFF',
     marginBottom: 4,
   },
   year: {
     fontSize: 12,
     color: '#BBBBBB',
-    marginBottom: 8,
   },
-  favoriteButton: {
-    marginTop: 8,
-    paddingVertical: 6,
-    alignItems: 'center',
-    borderRadius: 4,
-  },
-  favoriteContent: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
 });
