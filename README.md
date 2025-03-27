@@ -1,50 +1,106 @@
-# Welcome to your Expo app 👋
+# MovieMate
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A beautiful React Native movie discovery application built with Expo.
 
-## Get started
+![MovieMate App](/MovieMateExpo/assets/logo.png)
 
-1. Install dependencies
+## Features
 
-   ```bash
-   npm install
-   ```
+- **Movie Discovery**: Browse trending and popular movies
+- **Search Functionality**: Find movies by title, actor, or director
+- **Movie Details**: View comprehensive information about each movie
+- **Favorites/Bookmarks**: Save your favorite movies for later viewing
+- **Dark Theme UI**: Sleek dark-themed interface for comfortable viewing
 
-2. Start the app
+## Screenshots
 
-   ```bash
-    npx expo start
-   ```
+*(Screenshots would be included here)*
 
-In the output, you'll find options to open the app in a
+## Technologies
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+- React Native with Expo
+- React Navigation
+- React Query for data fetching
+- OMDb API for movie data
+- AsyncStorage for persistent data
+- Custom hooks for state management
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Installation
 
-## Get a fresh project
+### Prerequisites
 
-When you're ready, run:
+- Node.js and npm installed
+- Expo CLI: `npm install -g expo-cli`
 
+### Setup
+
+1. Clone the repository:
 ```bash
-npm run reset-project
+git clone https://github.com/yourusername/MovieMate.git
+cd MovieMate
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+2. Install dependencies:
+```bash
+cd MovieMateExpo
+npm install
+```
 
-## Learn more
+3. Start the development server:
+```bash
+npm start
+# or
+npx expo start
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+4. Run on mobile device or emulator:
+   - Scan the QR code with the Expo Go app (Android) or the Camera app (iOS)
+   - Press 'a' for Android emulator or 'i' for iOS simulator (if installed)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Project Structure
 
-## Join the community
+```
+MovieMateExpo/
+├── app/                  # App screens and navigation
+│   ├── (tabs)/           # Tab-based navigation screens
+│   └── movie/            # Movie details screen
+├── assets/               # Images, fonts, and other static resources
+├── components/           # Reusable UI components
+├── hooks/                # Custom React hooks
+└── constants/            # App constants and theme configuration
+```
 
-Join our community of developers creating universal apps.
+## API Usage
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+This project uses the OMDb API to fetch movie data. You'll need to:
+
+1. Get an API key from [OMDb API](https://www.omdbapi.com/apikey.aspx)
+2. The API key is already integrated in the app code, but you can replace it with your own if needed
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## Future Enhancements
+
+- User authentication and profiles
+- Advanced filtering and sorting options
+- Offline support
+- Movie recommendations based on viewing history
+- Integration with additional movie data sources
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- [OMDb API](https://www.omdbapi.com/) for providing movie data
+- [Expo](https://expo.dev/) for the amazing React Native toolchain
+- [React Navigation](https://reactnavigation.org/) for the navigation system 
