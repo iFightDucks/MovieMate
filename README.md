@@ -2,8 +2,6 @@
 
 A beautiful React Native movie discovery application built with Expo.
 
-![MovieMate App](/MovieMateExpo/assets/logo.png)
-
 ## Features
 
 - **Movie Discovery**: Browse trending and popular movies
